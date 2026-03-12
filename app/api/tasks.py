@@ -1,9 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.responses import StreamingResponse
+from openai import AsyncOpenAI
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.crud.task import create_task, delete_task, get_task, get_tasks, update_task
 from app.database import get_db
+from app.dependencies.openai import get_openai_client
 from app.schemas.task import TaskCreate, TaskResponse, TaskUpdate
+from app.services.task_explainer import explain_task_stream
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
 
@@ -93,3 +97,26 @@ async def delete_existing_task(
             detail="タスクが見つかりません",
         )
     await delete_task(db, task)
+
+
+@router.post(
+    "/{task_id}/explain",
+    summary="タスク状況のAI解説（SSEストリーミング）",
+    responses={404: {"description": "タスクが見つかりません"}},
+)
+async def explain_task(
+    task_id: int,
+    db: AsyncSession = Depends(get_db),
+    openai_client: AsyncOpenAI = Depends(get_openai_client),
+) -> StreamingResponse:
+    task = await get_task(db, task_id)
+    if task is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="タスクが見つかりません",
+        )
+    task_response = TaskResponse.model_validate(task)
+    return StreamingResponse(
+        explain_task_stream(openai_client, task_response),
+        media_type="text/event-stream",
+    )
