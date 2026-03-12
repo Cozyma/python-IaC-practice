@@ -62,4 +62,37 @@ export const taskApi = {
     }),
 };
 
-export { ApiError };
+async function* streamExplain(id: number): AsyncGenerator<string, void, unknown> {
+  const url = `${API_BASE_URL}/tasks/${id}/explain`;
+  const res = await fetch(url, { method: "POST" });
+
+  if (!res.ok) {
+    const detail = await res.text().catch(() => res.statusText);
+    throw new ApiError(res.status, detail);
+  }
+
+  const reader = res.body?.getReader();
+  if (!reader) throw new Error("ReadableStream not supported");
+
+  const decoder = new TextDecoder();
+  let buffer = "";
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split("\n");
+    buffer = lines.pop() ?? "";
+
+    for (const line of lines) {
+      if (line.startsWith("data: ")) {
+        const data = line.slice(6);
+        if (data === "[DONE]") return;
+        yield data;
+      }
+    }
+  }
+}
+
+export { ApiError, streamExplain };
