@@ -29,6 +29,7 @@ tags: [索引, ドキュメント]
 | `docs/decisions/2026-03-12-deploy-workflow.md` | デプロイワークフロー構築（ECR→ECS・Terraform apply） | ADR, CI/CD, GitHub Actions, ECS, ECR, Terraform, Alembic |
 | `docs/decisions/2026-03-12-nextjs-initial-setup.md` | Next.js (App Router) 初期セットアップ | ADR, Next.js, TypeScript, ESLint, Prettier, フロントエンド |
 | `docs/decisions/2026-03-12-tailwind-css-setup.md` | Tailwind CSS 導入・デザインシステム基盤 | ADR, Tailwind CSS, フロントエンド, デザイン |
+| `docs/decisions/2026-03-12-api-client.md` | APIクライアント構築（FastAPIバックエンド連携） | ADR, フロントエンド, API, TypeScript, fetch |
 
 ## guidelines/
 
