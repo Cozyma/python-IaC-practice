@@ -18,6 +18,7 @@ tags: [索引, ドキュメント]
 | `docs/decisions/2026-03-12-local-dev-environment.md` | ローカル開発環境構築（docker-compose.yml） | ADR, Docker, 開発環境, PostgreSQL |
 | `docs/decisions/2026-03-12-fastapi-async-architecture.md` | FastAPIアプリケーション基盤構築（DI・非同期処理） | ADR, FastAPI, SQLAlchemy, 非同期, DI |
 | `docs/decisions/2026-03-12-db-models-and-alembic.md` | DBモデル定義・Pydanticスキーマ・Alembicマイグレーション導入 | ADR, SQLAlchemy, Pydantic, Alembic, データベース |
+| `docs/decisions/2026-03-12-crud-api-implementation.md` | タスク管理CRUD API実装・OpenAPI定義 | ADR, FastAPI, CRUD, OpenAPI, テスト |
 
 ## guidelines/
 
