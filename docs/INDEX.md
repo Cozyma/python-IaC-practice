@@ -35,6 +35,7 @@ tags: [索引, ドキュメント]
 | `docs/decisions/2026-03-12-openai-api-integration.md` | OpenAI API統合方針（タスク解説機能） | ADR, OpenAI, FastAPI, SSE, ストリーミング, DI, セキュリティ |
 | `docs/decisions/2026-03-12-terraform-openai-secret.md` | Terraform OpenAI APIキー管理（Secrets Manager・ECS連携） | ADR, Terraform, Secrets Manager, ECS, OpenAI, セキュリティ |
 | `docs/decisions/2026-03-12-fastapi-openai-endpoint.md` | FastAPI OpenAI連携エンドポイント実装（SSEストリーミング） | ADR, FastAPI, OpenAI, SSE, DI, tenacity, ストリーミング |
+| `docs/decisions/2026-03-12-openai-test-mock.md` | OpenAI連携テスト・モック化方針 | ADR, pytest, OpenAI, モック, テスト, CI |
 
 ## guidelines/
 
