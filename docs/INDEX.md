@@ -22,6 +22,7 @@ tags: [索引, ドキュメント]
 | `docs/decisions/2026-03-12-terraform-foundation.md` | Terraform基盤構築（モジュール構成・tfstate管理） | ADR, Terraform, IaC, S3, tfstate |
 | `docs/decisions/2026-03-12-vpc-network-module.md` | Terraform VPC・ネットワークモジュール構築 | ADR, Terraform, VPC, ネットワーク, セキュリティグループ |
 | `docs/decisions/2026-03-12-ecr-iam-oidc.md` | Terraform ECR・IAMロール・OIDC連携モジュール構築 | ADR, Terraform, ECR, IAM, OIDC, GitHub Actions |
+| `docs/decisions/2026-03-12-rds-secrets-manager.md` | Terraform RDS (PostgreSQL) モジュール・Secrets Manager連携 | ADR, Terraform, RDS, PostgreSQL, Secrets Manager |
 
 ## guidelines/
 
