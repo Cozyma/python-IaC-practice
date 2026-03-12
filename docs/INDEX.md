@@ -24,6 +24,7 @@ tags: [索引, ドキュメント]
 | `docs/decisions/2026-03-12-ecr-iam-oidc.md` | Terraform ECR・IAMロール・OIDC連携モジュール構築 | ADR, Terraform, ECR, IAM, OIDC, GitHub Actions |
 | `docs/decisions/2026-03-12-rds-secrets-manager.md` | Terraform RDS (PostgreSQL) モジュール・Secrets Manager連携 | ADR, Terraform, RDS, PostgreSQL, Secrets Manager |
 | `docs/decisions/2026-03-12-ecs-alb-module.md` | Terraform ECS (Fargate)・ALBモジュール構築 | ADR, Terraform, ECS, Fargate, ALB, CloudWatch |
+| `docs/decisions/2026-03-12-cd-pipeline.md` | CDパイプライン構築（Terraform Plan・IaC静的解析） | ADR, CI/CD, Terraform, tflint, tfsec, GitHub Actions |
 
 ## guidelines/
 
