@@ -27,6 +27,7 @@ tags: [索引, ドキュメント]
 | `docs/decisions/2026-03-12-ecs-alb-module.md` | Terraform ECS (Fargate)・ALBモジュール構築 | ADR, Terraform, ECS, Fargate, ALB, CloudWatch |
 | `docs/decisions/2026-03-12-cd-pipeline.md` | CDパイプライン構築（Terraform Plan・IaC静的解析） | ADR, CI/CD, Terraform, tflint, tfsec, GitHub Actions |
 | `docs/decisions/2026-03-12-deploy-workflow.md` | デプロイワークフロー構築（ECR→ECS・Terraform apply） | ADR, CI/CD, GitHub Actions, ECS, ECR, Terraform, Alembic |
+| `docs/decisions/2026-03-12-nextjs-initial-setup.md` | Next.js (App Router) 初期セットアップ | ADR, Next.js, TypeScript, ESLint, Prettier, フロントエンド |
 
 ## guidelines/
 

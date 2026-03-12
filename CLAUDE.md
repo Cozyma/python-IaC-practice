@@ -15,7 +15,8 @@
 
 ## 技術スタック
 
+- フロントエンド: Next.js 15 (App Router), TypeScript
 - バックエンド: FastAPI, SQLAlchemy (async), Alembic, Pydantic
 - インフラ: Terraform (AWS: VPC, ECS Fargate, RDS, ALB)
 - CI/CD: GitHub Actions
-- 品質管理: Ruff, mypy, pytest
+- 品質管理: Ruff, mypy, pytest, ESLint, Prettier
