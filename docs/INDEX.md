@@ -32,6 +32,7 @@ tags: [索引, ドキュメント]
 | `docs/decisions/2026-03-12-api-client.md` | APIクライアント構築（FastAPIバックエンド連携） | ADR, フロントエンド, API, TypeScript, fetch |
 | `docs/decisions/2026-03-12-task-management-ui.md` | タスク管理UI実装（一覧・作成・更新・削除） | ADR, Next.js, App Router, Server Components, Server Actions, UI |
 | `docs/decisions/2026-03-12-frontend-test-foundation.md` | フロントエンドテスト基盤構築（Vitest + Testing Library） | ADR, Vitest, Testing Library, MSW, フロントエンド, テスト |
+| `docs/decisions/2026-03-12-openai-api-integration.md` | OpenAI API統合方針（タスク解説機能） | ADR, OpenAI, FastAPI, SSE, ストリーミング, DI, セキュリティ |
 
 ## guidelines/
 
