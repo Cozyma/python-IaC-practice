@@ -30,6 +30,7 @@ tags: [索引, ドキュメント]
 | `docs/decisions/2026-03-12-nextjs-initial-setup.md` | Next.js (App Router) 初期セットアップ | ADR, Next.js, TypeScript, ESLint, Prettier, フロントエンド |
 | `docs/decisions/2026-03-12-tailwind-css-setup.md` | Tailwind CSS 導入・デザインシステム基盤 | ADR, Tailwind CSS, フロントエンド, デザイン |
 | `docs/decisions/2026-03-12-api-client.md` | APIクライアント構築（FastAPIバックエンド連携） | ADR, フロントエンド, API, TypeScript, fetch |
+| `docs/decisions/2026-03-12-task-management-ui.md` | タスク管理UI実装（一覧・作成・更新・削除） | ADR, Next.js, App Router, Server Components, Server Actions, UI |
 
 ## guidelines/
 
