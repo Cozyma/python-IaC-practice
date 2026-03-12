@@ -20,6 +20,7 @@ tags: [索引, ドキュメント]
 | `docs/decisions/2026-03-12-db-models-and-alembic.md` | DBモデル定義・Pydanticスキーマ・Alembicマイグレーション導入 | ADR, SQLAlchemy, Pydantic, Alembic, データベース |
 | `docs/decisions/2026-03-12-crud-api-implementation.md` | タスク管理CRUD API実装・OpenAPI定義 | ADR, FastAPI, CRUD, OpenAPI, テスト |
 | `docs/decisions/2026-03-12-terraform-foundation.md` | Terraform基盤構築（モジュール構成・tfstate管理） | ADR, Terraform, IaC, S3, tfstate |
+| `docs/decisions/2026-03-12-vpc-network-module.md` | Terraform VPC・ネットワークモジュール構築 | ADR, Terraform, VPC, ネットワーク, セキュリティグループ |
 
 ## guidelines/
 
