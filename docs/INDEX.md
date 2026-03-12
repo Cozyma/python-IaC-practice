@@ -16,6 +16,7 @@ tags: [索引, ドキュメント]
 | :--- | :--- | :--- |
 | `docs/decisions/2026-03-12-ci-pipeline-setup.md` | CIパイプライン構築（Ruff・mypy・pytest） | ADR, CI/CD, GitHub Actions, Ruff, mypy, pytest |
 | `docs/decisions/2026-03-12-local-dev-environment.md` | ローカル開発環境構築（docker-compose.yml） | ADR, Docker, 開発環境, PostgreSQL |
+| `docs/decisions/2026-03-12-fastapi-async-architecture.md` | FastAPIアプリケーション基盤構築（DI・非同期処理） | ADR, FastAPI, SQLAlchemy, 非同期, DI |
 
 ## guidelines/
 
