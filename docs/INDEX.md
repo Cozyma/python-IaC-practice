@@ -21,6 +21,7 @@ tags: [索引, ドキュメント]
 | `docs/decisions/2026-03-12-crud-api-implementation.md` | タスク管理CRUD API実装・OpenAPI定義 | ADR, FastAPI, CRUD, OpenAPI, テスト |
 | `docs/decisions/2026-03-12-terraform-foundation.md` | Terraform基盤構築（モジュール構成・tfstate管理） | ADR, Terraform, IaC, S3, tfstate |
 | `docs/decisions/2026-03-12-vpc-network-module.md` | Terraform VPC・ネットワークモジュール構築 | ADR, Terraform, VPC, ネットワーク, セキュリティグループ |
+| `docs/decisions/2026-03-12-ecr-iam-oidc.md` | Terraform ECR・IAMロール・OIDC連携モジュール構築 | ADR, Terraform, ECR, IAM, OIDC, GitHub Actions |
 
 ## guidelines/
 
