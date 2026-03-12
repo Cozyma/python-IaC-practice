@@ -5,20 +5,21 @@
 ## アーキテクチャ
 
 ```
-Client → ALB → ECS (Fargate) → RDS (PostgreSQL)
-                  │
-                  └── FastAPI (Python 3.12)
+Client → Next.js (SSR) → ALB → ECS (Fargate) → RDS (PostgreSQL)
+                                     │
+                                     └── FastAPI (Python 3.12)
 ```
 
 ### 技術スタック
 
 | レイヤー | 技術 |
 |---------|------|
+| フロントエンド | Next.js 15 (App Router), TypeScript |
 | バックエンド | FastAPI, SQLAlchemy, Alembic, Pydantic |
 | インフラ (AWS) | VPC, ECS (Fargate), RDS (PostgreSQL), ALB, ECR |
 | IaC | Terraform (モジュール分割) |
 | CI/CD | GitHub Actions |
-| 品質管理 | Ruff, mypy, pytest |
+| 品質管理 | Ruff, mypy, pytest, ESLint, Prettier |
 
 ## ディレクトリ構成
 
@@ -32,6 +33,8 @@ Client → ALB → ECS (Fargate) → RDS (PostgreSQL)
 │   ├── schemas/               # Pydantic スキーマ
 │   ├── tests/                 # pytest
 │   └── alembic/               # マイグレーション
+├── frontend/                  # Next.js (App Router)
+│   └── src/app/               # App Router ページ
 ├── infra/                     # Terraform
 │   ├── environments/          # 環境別設定 (dev/prod)
 │   └── modules/               # 再利用可能モジュール
@@ -45,6 +48,7 @@ Client → ALB → ECS (Fargate) → RDS (PostgreSQL)
 ### 必要なツール
 
 - Python 3.12+
+- Node.js 22+
 - Docker / Docker Compose
 - Terraform 1.5+
 
@@ -70,4 +74,11 @@ mypy app/
 
 # テスト
 pytest
+
+# --- フロントエンド ---
+cd frontend
+npm install
+npm run dev       # http://localhost:3000
+npm run lint
+npm run format:check
 ```
