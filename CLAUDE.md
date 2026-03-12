@@ -2,10 +2,14 @@
 
 ## プロジェクト規約
 
-- コミット前に必ず `docs/docs-and-testing-policy.md` を参照し、以下を確認すること:
+- コミット前に必ず以下のポリシーを参照すること:
+  - `docs/POLICY.md` — 開発ワークフロー（Doc First → Implementation の2フェーズ）
+  - `docs/docs-and-testing-policy.md` — ドキュメント管理規約・ADRフォーマット・テスト方針
+- 確認事項:
   - ドキュメント命名規則・Frontmatter規約に準拠しているか
   - Issue完了時にADR（`docs/decisions/`）を作成したか
   - `docs/INDEX.md` を更新したか
+  - 仕様ドキュメントと実装に乖離がないか（SSOT原則）
 - コミットメッセージは Conventional Commits（`feat:`, `fix:`, `chore:`, `docs:` 等）を使用する
 - 自動コミット禁止（明示的に指示された場合のみ実行）
 

@@ -8,6 +8,7 @@ tags: [索引, ドキュメント]
 
 | File Path | Title / Description (Japanese) | Tags |
 | :--- | :--- | :--- |
+| `docs/POLICY.md` | 開発ポリシー（仕様駆動 + Issue駆動ワークフロー） | 規約, ポリシー, ワークフロー, SSOT |
 | `docs/docs-and-testing-policy.md` | ドキュメント管理方針とテスト基本方針（汎用） | 規約, ドキュメント, テスト, エージェント |
 
 ## decisions/
