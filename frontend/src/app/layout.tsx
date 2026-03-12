@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Task Management",
@@ -12,7 +15,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body>{children}</body>
+      <body className="flex min-h-screen flex-col bg-bg text-text">
+        <Header />
+        <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
+          {children}
+        </main>
+        <Footer />
+      </body>
     </html>
   );
 }
