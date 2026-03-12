@@ -42,3 +42,4 @@ tags: [索引, ドキュメント]
 
 | File Path | Title / Description (Japanese) | Tags |
 | :--- | :--- | :--- |
+| `docs/guidelines/development-guide.md` | 開発ガイド — このリポジトリの育て方（具体例付き） | ガイド, 開発フロー, 具体例, Issue, PR, ブランチ, ADR |
