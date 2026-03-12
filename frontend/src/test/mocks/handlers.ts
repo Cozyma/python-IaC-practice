@@ -72,4 +72,15 @@ export const handlers = [
     }
     return new HttpResponse(null, { status: 204 });
   }),
+
+  http.post(`${API_BASE_URL}/tasks/:id/explain`, ({ params }) => {
+    const task = mockTasks.find((t) => t.id === Number(params.id));
+    if (!task) {
+      return new HttpResponse(null, { status: 404 });
+    }
+    const body = `data: このタスクは\n\ndata: テスト用です。\n\ndata: [DONE]\n\n`;
+    return new HttpResponse(body, {
+      headers: { "Content-Type": "text/event-stream" },
+    });
+  }),
 ];
