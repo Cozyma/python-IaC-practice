@@ -28,6 +28,7 @@ tags: [索引, ドキュメント]
 | `docs/decisions/2026-03-12-cd-pipeline.md` | CDパイプライン構築（Terraform Plan・IaC静的解析） | ADR, CI/CD, Terraform, tflint, tfsec, GitHub Actions |
 | `docs/decisions/2026-03-12-deploy-workflow.md` | デプロイワークフロー構築（ECR→ECS・Terraform apply） | ADR, CI/CD, GitHub Actions, ECS, ECR, Terraform, Alembic |
 | `docs/decisions/2026-03-12-nextjs-initial-setup.md` | Next.js (App Router) 初期セットアップ | ADR, Next.js, TypeScript, ESLint, Prettier, フロントエンド |
+| `docs/decisions/2026-03-12-tailwind-css-setup.md` | Tailwind CSS 導入・デザインシステム基盤 | ADR, Tailwind CSS, フロントエンド, デザイン |
 
 ## guidelines/
 
