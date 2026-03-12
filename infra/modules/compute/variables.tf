@@ -59,6 +59,12 @@ variable "db_secret_arn" {
   type        = string
 }
 
+variable "openai_secret_arn" {
+  description = "OpenAI APIキーのSecrets Manager ARN"
+  type        = string
+  default     = ""
+}
+
 variable "task_cpu" {
   description = "タスクCPU（単位）"
   type        = string
