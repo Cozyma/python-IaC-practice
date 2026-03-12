@@ -109,12 +109,20 @@ resource "aws_ecs_task_definition" "app" {
         }
       ]
 
-      secrets = [
-        {
-          name      = "DATABASE_URL"
-          valueFrom = "${var.db_secret_arn}:host::"
-        }
-      ]
+      secrets = concat(
+        [
+          {
+            name      = "DATABASE_URL"
+            valueFrom = "${var.db_secret_arn}:host::"
+          }
+        ],
+        var.openai_secret_arn != "" ? [
+          {
+            name      = "OPENAI_API_KEY"
+            valueFrom = var.openai_secret_arn
+          }
+        ] : []
+      )
 
       logConfiguration = {
         logDriver = "awslogs"

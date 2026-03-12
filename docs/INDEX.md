@@ -33,6 +33,7 @@ tags: [索引, ドキュメント]
 | `docs/decisions/2026-03-12-task-management-ui.md` | タスク管理UI実装（一覧・作成・更新・削除） | ADR, Next.js, App Router, Server Components, Server Actions, UI |
 | `docs/decisions/2026-03-12-frontend-test-foundation.md` | フロントエンドテスト基盤構築（Vitest + Testing Library） | ADR, Vitest, Testing Library, MSW, フロントエンド, テスト |
 | `docs/decisions/2026-03-12-openai-api-integration.md` | OpenAI API統合方針（タスク解説機能） | ADR, OpenAI, FastAPI, SSE, ストリーミング, DI, セキュリティ |
+| `docs/decisions/2026-03-12-terraform-openai-secret.md` | Terraform OpenAI APIキー管理（Secrets Manager・ECS連携） | ADR, Terraform, Secrets Manager, ECS, OpenAI, セキュリティ |
 
 ## guidelines/
 
