@@ -519,6 +519,23 @@ tags: [ADR, 関連技術1, 関連技術2]
 
 はい。ただし大げさに書く必要はありません。「背景1〜2行、決定内容箇条書き、代替案1〜2行、結果1〜2行」で十分です。未来の自分が「なんでこうしたんだっけ？」と迷わないことが目的です。
 
+### Q: Claude Code のスキルって何？セットアップは？
+
+このプロジェクトでは Claude Code 用のスキル（ベストプラクティス・コード規約）を `skills-lock.json` で管理しています。スキルは Claude Code がコード生成時に参照するナレッジベースのようなものです。
+
+```bash
+# クローン後に一括インストール
+npx skills experimental_install
+
+# 新しいスキルを追加（skills-lock.json が自動更新される）
+npx skills add <owner/repo@skill> -g -y
+
+# スキルの検索
+npx skills find "キーワード"
+```
+
+スキルの追加・削除後は `skills-lock.json` の変更をコミットしてください。`.agents/` ディレクトリ（実体ファイル）は `.gitignore` で除外されています。
+
 ### Q: Terraform を触ったことがないけど、バックエンドやフロントエンドだけ開発していい？
 
 もちろんOKです。`infra/` を触らなければ Terraform の知識は不要です。ローカル開発は `docker compose up -d` だけで動きます。
@@ -576,11 +593,20 @@ Phase 5: AI 機能
   #41 FastAPI エンドポイント（SSE ストリーミング）
   #42 テスト（モック化）
   #43 フロントエンド UI（SSE 描画）
+
+Phase 6: 認証機能
+  #49 認証方式 ADR（JWT + bcrypt）
+  #50 User モデル + Alembic マイグレーション
+  #51 認証エンドポイント（register/login/refresh/me/logout）
+  #52 認証ミドルウェア + ルート保護（get_current_user DI）
+  #53 ログイン・登録 UI + AuthContext
+  #54 フロントエンド認証ルート保護・API 連携
+  #55 Terraform JWT 秘密鍵（Secrets Manager）
+  #56 認証テスト（35件全パス）
 ```
 
 **次に追加するなら？（例）**
 
-- 認証・認可（NextAuth.js + JWT）
 - タスクの優先度・期限フィールド追加
 - ダッシュボード（統計・グラフ表示）
 - E2E テスト（Playwright）

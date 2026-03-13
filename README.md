@@ -112,6 +112,7 @@
 ├── docker-compose.yml          # ローカル開発環境
 ├── Dockerfile
 ├── pyproject.toml              # Python依存関係・ツール設定
+├── skills-lock.json            # Claude Code スキル定義（npx skills experimental_install で復元）
 └── .env.example                # 環境変数テンプレート
 ```
 
@@ -133,15 +134,30 @@
 ```bash
 # 1. 環境変数ファイルを作成
 cp .env.example .env
-# .env を編集して OPENAI_API_KEY を設定（AI解説機能を使う場合）
+# .env を編集して必要な値を設定:
+#   - OPENAI_API_KEY: AI解説機能を使う場合
+#   - JWT_SECRET_KEY: 認証用（開発時はデフォルト値で動作）
 
 # 2. 全サービスを起動（FastAPI + Next.js + PostgreSQL）
 docker compose up -d
 
-# 3. アクセス
-# バックエンド API:    http://localhost:8000
-# フロントエンド:       http://localhost:3000
-# API ドキュメント:     http://localhost:8000/docs（Swagger UI）
+# 3. DBマイグレーション実行
+docker compose exec app python -m alembic upgrade head
+
+# 4. アクセス
+# バックエンド API:    http://localhost:8400
+# フロントエンド:       http://localhost:3100
+# API ドキュメント:     http://localhost:8400/docs（Swagger UI）
+# PostgreSQL:          localhost:5433
+```
+
+### Claude Code スキルの復元
+
+このプロジェクトでは Claude Code 用のスキル（ベストプラクティス・コード規約）を `skills-lock.json` で管理しています。
+
+```bash
+# プロジェクトで使用するスキルを一括インストール
+npx skills experimental_install
 ```
 
 ### 開発用コマンド
