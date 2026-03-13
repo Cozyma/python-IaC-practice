@@ -121,6 +121,12 @@ resource "aws_ecs_task_definition" "app" {
             name      = "OPENAI_API_KEY"
             valueFrom = var.openai_secret_arn
           }
+        ] : [],
+        var.jwt_secret_arn != "" ? [
+          {
+            name      = "JWT_SECRET_KEY"
+            valueFrom = var.jwt_secret_arn
+          }
         ] : []
       )
 

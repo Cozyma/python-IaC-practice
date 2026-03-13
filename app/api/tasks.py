@@ -5,7 +5,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.crud.task import create_task, delete_task, get_task, get_tasks, update_task
 from app.database import get_db
+from app.dependencies.auth import get_current_user, get_current_user_optional
 from app.dependencies.openai import get_openai_client
+from app.models.user import User
 from app.schemas.task import TaskCreate, TaskResponse, TaskUpdate
 from app.services.task_explainer import explain_task_stream
 
@@ -21,6 +23,7 @@ async def list_tasks(
     skip: int = 0,
     limit: int = 100,
     db: AsyncSession = Depends(get_db),
+    current_user: User | None = Depends(get_current_user_optional),
 ) -> list[TaskResponse]:
     tasks = await get_tasks(db, skip=skip, limit=limit)
     return [TaskResponse.model_validate(t) for t in tasks]
@@ -54,8 +57,9 @@ async def read_task(
 async def create_new_task(
     task_in: TaskCreate,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ) -> TaskResponse:
-    task = await create_task(db, task_in)
+    task = await create_task(db, task_in, user_id=current_user.id)
     return TaskResponse.model_validate(task)
 
 
@@ -69,12 +73,18 @@ async def update_existing_task(
     task_id: int,
     task_in: TaskUpdate,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ) -> TaskResponse:
     task = await get_task(db, task_id)
     if task is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="タスクが見つかりません",
+        )
+    if task.user_id is not None and task.user_id != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="権限がありません",
         )
     updated = await update_task(db, task, task_in)
     return TaskResponse.model_validate(updated)
@@ -89,12 +99,18 @@ async def update_existing_task(
 async def delete_existing_task(
     task_id: int,
     db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user),
 ) -> None:
     task = await get_task(db, task_id)
     if task is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="タスクが見つかりません",
+        )
+    if task.user_id is not None and task.user_id != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="権限がありません",
         )
     await delete_task(db, task)
 
@@ -108,6 +124,7 @@ async def explain_task(
     task_id: int,
     db: AsyncSession = Depends(get_db),
     openai_client: AsyncOpenAI = Depends(get_openai_client),
+    current_user: User = Depends(get_current_user),
 ) -> StreamingResponse:
     task = await get_task(db, task_id)
     if task is None:

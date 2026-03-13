@@ -36,3 +36,14 @@ module "network" {
   environment  = var.environment
   vpc_cidr     = var.vpc_cidr
 }
+
+# ====================
+# JWT Secret (Secrets Manager)
+# ====================
+resource "aws_secretsmanager_secret" "jwt_secret" {
+  name = "${var.project_name}-${var.environment}-jwt-secret"
+
+  tags = {
+    Name = "${var.project_name}-${var.environment}-jwt-secret"
+  }
+}

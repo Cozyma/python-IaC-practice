@@ -65,6 +65,12 @@ variable "openai_secret_arn" {
   default     = ""
 }
 
+variable "jwt_secret_arn" {
+  description = "JWT秘密鍵のSecrets Manager ARN"
+  type        = string
+  default     = ""
+}
+
 variable "task_cpu" {
   description = "タスクCPU（単位）"
   type        = string

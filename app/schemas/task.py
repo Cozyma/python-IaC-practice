@@ -29,5 +29,6 @@ class TaskResponse(BaseModel):
     title: str
     description: str | None
     status: TaskStatus
+    user_id: int | None = None
     created_at: datetime
     updated_at: datetime

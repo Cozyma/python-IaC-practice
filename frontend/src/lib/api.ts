@@ -1,7 +1,10 @@
 import type { Task, TaskCreate, TaskUpdate } from "@/types/task";
+import { getAccessToken } from "@/lib/auth";
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+  typeof window === "undefined"
+    ? (process.env.API_URL_INTERNAL ?? "http://app:8000")
+    : (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000");
 
 class ApiError extends Error {
   constructor(
@@ -15,15 +18,27 @@ class ApiError extends Error {
 
 async function fetchApi<T>(
   path: string,
-  options?: RequestInit,
+  options?: RequestInit & { auth?: boolean },
 ): Promise<T> {
   const url = `${API_BASE_URL}${path}`;
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    ...((options?.headers as Record<string, string>) ?? {}),
+  };
+
+  // Add auth header if requested and token is available
+  if (options?.auth !== false) {
+    const token = typeof window !== "undefined" ? getAccessToken() : null;
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+  }
+
+  const { auth: _, ...fetchOptions } = options ?? {};
+
   const res = await fetch(url, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...options?.headers,
-    },
+    ...fetchOptions,
+    headers,
   });
 
   if (!res.ok) {
@@ -40,9 +55,9 @@ async function fetchApi<T>(
 
 export const taskApi = {
   list: (skip = 0, limit = 100) =>
-    fetchApi<Task[]>(`/tasks?skip=${skip}&limit=${limit}`),
+    fetchApi<Task[]>(`/tasks?skip=${skip}&limit=${limit}`, { auth: false }),
 
-  get: (id: number) => fetchApi<Task>(`/tasks/${id}`),
+  get: (id: number) => fetchApi<Task>(`/tasks/${id}`, { auth: false }),
 
   create: (data: TaskCreate) =>
     fetchApi<Task>("/tasks", {
@@ -64,7 +79,13 @@ export const taskApi = {
 
 async function* streamExplain(id: number): AsyncGenerator<string, void, unknown> {
   const url = `${API_BASE_URL}/tasks/${id}/explain`;
-  const res = await fetch(url, { method: "POST" });
+  const headers: Record<string, string> = {};
+  const token = typeof window !== "undefined" ? getAccessToken() : null;
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  const res = await fetch(url, { method: "POST", headers });
 
   if (!res.ok) {
     const detail = await res.text().catch(() => res.statusText);

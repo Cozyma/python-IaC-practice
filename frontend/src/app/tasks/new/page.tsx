@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { createTask } from "../actions";
-import { TaskForm } from "@/components/task-form";
+import { TaskFormClient } from "@/components/task-form-client";
 
 export default function NewTaskPage() {
   return (
@@ -11,7 +10,7 @@ export default function NewTaskPage() {
         </Link>
         <h1 className="text-2xl font-bold">タスク作成</h1>
       </div>
-      <TaskForm action={createTask} />
+      <TaskFormClient />
     </div>
   );
 }

@@ -15,8 +15,10 @@ async def get_task(db: AsyncSession, task_id: int) -> Task | None:
     return result.scalar_one_or_none()
 
 
-async def create_task(db: AsyncSession, task_in: TaskCreate) -> Task:
-    task = Task(**task_in.model_dump())
+async def create_task(
+    db: AsyncSession, task_in: TaskCreate, user_id: int | None = None
+) -> Task:
+    task = Task(**task_in.model_dump(), user_id=user_id)
     db.add(task)
     await db.commit()
     await db.refresh(task)

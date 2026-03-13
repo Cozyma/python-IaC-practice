@@ -2,8 +2,10 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 from httpx import ASGITransport, AsyncClient
 
+from app.dependencies.auth import get_current_user
 from app.dependencies.openai import get_openai_client
 from app.main import app
+from app.tests.conftest import make_mock_user
 
 
 def _make_mock_task(
@@ -11,6 +13,7 @@ def _make_mock_task(
     title: str = "テストタスク",
     description: str | None = "テスト説明",
     status: str = "todo",
+    user_id: int | None = 1,
 ) -> AsyncMock:
     from datetime import datetime, timezone
 
@@ -19,6 +22,7 @@ def _make_mock_task(
     mock.title = title
     mock.description = description
     mock.status = status
+    mock.user_id = user_id
     mock.created_at = datetime(2026, 1, 1, tzinfo=timezone.utc)
     mock.updated_at = datetime(2026, 1, 1, tzinfo=timezone.utc)
     return mock
@@ -44,12 +48,15 @@ def _mock_openai_client() -> AsyncMock:
     return mock_client
 
 
+def _setup_overrides() -> None:
+    app.dependency_overrides[get_openai_client] = _mock_openai_client
+    app.dependency_overrides[get_current_user] = lambda: make_mock_user()
+
+
 class TestExplainEndpoint:
     async def test_タスク解説がSSEで返される(self) -> None:
         mock_task = _make_mock_task()
-        mock_client = _mock_openai_client()
-
-        app.dependency_overrides[get_openai_client] = lambda: mock_client
+        _setup_overrides()
 
         try:
             with patch("app.api.tasks.get_task", return_value=mock_task):
@@ -68,8 +75,7 @@ class TestExplainEndpoint:
             app.dependency_overrides.clear()
 
     async def test_存在しないタスクは404(self) -> None:
-        mock_client = _mock_openai_client()
-        app.dependency_overrides[get_openai_client] = lambda: mock_client
+        _setup_overrides()
 
         try:
             with patch("app.api.tasks.get_task", return_value=None):
@@ -82,20 +88,10 @@ class TestExplainEndpoint:
         finally:
             app.dependency_overrides.clear()
 
-    async def test_OPENAI_API_KEY未設定でもテストが通る(self) -> None:
-        """CIで OPENAI_API_KEY 環境変数なしでも動作することを確認"""
-        mock_task = _make_mock_task()
-        mock_client = _mock_openai_client()
+    async def test_未認証でタスク解説は401(self) -> None:
+        async with AsyncClient(
+            transport=ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            response = await client.post("/tasks/1/explain")
 
-        app.dependency_overrides[get_openai_client] = lambda: mock_client
-
-        try:
-            with patch("app.api.tasks.get_task", return_value=mock_task):
-                async with AsyncClient(
-                    transport=ASGITransport(app=app), base_url="http://test"
-                ) as client:
-                    response = await client.post("/tasks/1/explain")
-
-            assert response.status_code == 200
-        finally:
-            app.dependency_overrides.clear()
+        assert response.status_code == 401

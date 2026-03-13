@@ -5,6 +5,7 @@ export interface Task {
   title: string;
   description: string | null;
   status: TaskStatus;
+  user_id: number | null;
   created_at: string;
   updated_at: string;
 }

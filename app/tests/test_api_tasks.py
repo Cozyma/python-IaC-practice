@@ -2,8 +2,10 @@ from unittest.mock import AsyncMock, patch
 
 from httpx import ASGITransport, AsyncClient
 
+from app.dependencies.auth import get_current_user
 from app.main import app
 from app.schemas.task import TaskStatus
+from app.tests.conftest import make_mock_user
 
 
 def _make_mock_task(
@@ -11,6 +13,7 @@ def _make_mock_task(
     title: str = "テストタスク",
     description: str | None = None,
     status: str = "todo",
+    user_id: int | None = 1,
 ) -> AsyncMock:
     from datetime import datetime, timezone
 
@@ -19,35 +22,60 @@ def _make_mock_task(
     mock.title = title
     mock.description = description
     mock.status = status
+    mock.user_id = user_id
     mock.created_at = datetime(2026, 1, 1, tzinfo=timezone.utc)
     mock.updated_at = datetime(2026, 1, 1, tzinfo=timezone.utc)
     return mock
 
 
+def _override_auth() -> None:
+    app.dependency_overrides[get_current_user] = lambda: make_mock_user()
+
+
+def _clear_overrides() -> None:
+    app.dependency_overrides.clear()
+
+
 class TestCreateTask:
     async def test_タスクを作成できる(self) -> None:
         mock_task = _make_mock_task()
+        _override_auth()
 
-        with patch("app.api.tasks.create_task", return_value=mock_task):
-            async with AsyncClient(
-                transport=ASGITransport(app=app), base_url="http://test"
-            ) as client:
-                response = await client.post(
-                    "/tasks", json={"title": "テストタスク"}
-                )
+        try:
+            with patch("app.api.tasks.create_task", return_value=mock_task):
+                async with AsyncClient(
+                    transport=ASGITransport(app=app), base_url="http://test"
+                ) as client:
+                    response = await client.post(
+                        "/tasks", json={"title": "テストタスク"}
+                    )
 
-        assert response.status_code == 201
-        data = response.json()
-        assert data["title"] == "テストタスク"
-        assert data["status"] == TaskStatus.TODO
+            assert response.status_code == 201
+            data = response.json()
+            assert data["title"] == "テストタスク"
+            assert data["status"] == TaskStatus.TODO
+        finally:
+            _clear_overrides()
 
-    async def test_タイトル未指定は422エラー(self) -> None:
+    async def test_未認証でタスク作成は401(self) -> None:
         async with AsyncClient(
             transport=ASGITransport(app=app), base_url="http://test"
         ) as client:
-            response = await client.post("/tasks", json={})
+            response = await client.post("/tasks", json={"title": "テスト"})
 
-        assert response.status_code == 422
+        assert response.status_code == 401
+
+    async def test_タイトル未指定は422エラー(self) -> None:
+        _override_auth()
+        try:
+            async with AsyncClient(
+                transport=ASGITransport(app=app), base_url="http://test"
+            ) as client:
+                response = await client.post("/tasks", json={})
+
+            assert response.status_code == 422
+        finally:
+            _clear_overrides()
 
 
 class TestGetTasks:
@@ -90,14 +118,26 @@ class TestGetTask:
 class TestDeleteTask:
     async def test_タスクを削除できる(self) -> None:
         mock_task = _make_mock_task()
+        _override_auth()
 
-        with (
-            patch("app.api.tasks.get_task", return_value=mock_task),
-            patch("app.api.tasks.delete_task", return_value=None),
-        ):
-            async with AsyncClient(
-                transport=ASGITransport(app=app), base_url="http://test"
-            ) as client:
-                response = await client.delete("/tasks/1")
+        try:
+            with (
+                patch("app.api.tasks.get_task", return_value=mock_task),
+                patch("app.api.tasks.delete_task", return_value=None),
+            ):
+                async with AsyncClient(
+                    transport=ASGITransport(app=app), base_url="http://test"
+                ) as client:
+                    response = await client.delete("/tasks/1")
 
-        assert response.status_code == 204
+            assert response.status_code == 204
+        finally:
+            _clear_overrides()
+
+    async def test_未認証でタスク削除は401(self) -> None:
+        async with AsyncClient(
+            transport=ASGITransport(app=app), base_url="http://test"
+        ) as client:
+            response = await client.delete("/tasks/1")
+
+        assert response.status_code == 401
