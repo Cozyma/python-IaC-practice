@@ -25,9 +25,7 @@ async def create_task(
     return task
 
 
-async def update_task(
-    db: AsyncSession, task: Task, task_in: TaskUpdate
-) -> Task:
+async def update_task(db: AsyncSession, task: Task, task_in: TaskUpdate) -> Task:
     update_data = task_in.model_dump(exclude_unset=True)
     for field, value in update_data.items():
         setattr(task, field, value)

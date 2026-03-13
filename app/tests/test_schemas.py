@@ -38,5 +38,5 @@ class TestTaskUpdate:
         assert update.status is None
 
     def test_全フィールドNoneで作成できる(self) -> None:
-        update = TaskUpdate()
+        update = TaskUpdate(title=None)
         assert update.title is None

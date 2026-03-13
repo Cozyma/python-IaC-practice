@@ -1,3 +1,4 @@
+from collections.abc import AsyncGenerator
 from unittest.mock import AsyncMock, MagicMock, patch
 
 from httpx import ASGITransport, AsyncClient
@@ -39,7 +40,7 @@ def _make_chunk(content: str | None) -> MagicMock:
 
 
 def _mock_openai_client() -> AsyncMock:
-    async def mock_stream():
+    async def mock_stream() -> AsyncGenerator[MagicMock, None]:
         yield _make_chunk("テスト解説")
         yield _make_chunk("です。")
 

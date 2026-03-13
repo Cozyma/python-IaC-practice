@@ -27,11 +27,7 @@ def _build_user_prompt(task: TaskResponse) -> str:
     }
     status_label = status_labels.get(task.status, task.status)
     description = task.description or "（説明なし）"
-    return (
-        f"タスク名: {task.title}\n"
-        f"説明: {description}\n"
-        f"ステータス: {status_label}"
-    )
+    return f"タスク名: {task.title}\n説明: {description}\nステータス: {status_label}"
 
 
 @retry(
