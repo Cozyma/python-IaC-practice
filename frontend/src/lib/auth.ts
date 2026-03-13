@@ -5,8 +5,7 @@ import type {
   TokenResponse,
 } from "@/types/user";
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 let accessToken: string | null = null;
 

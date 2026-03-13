@@ -25,9 +25,7 @@ export function Header() {
             {isLoading ? null : user ? (
               <>
                 <li>
-                  <span className="text-sm text-gray-500">
-                    {user.username}
-                  </span>
+                  <span className="text-sm text-gray-500">{user.username}</span>
                 </li>
                 <li>
                   <button

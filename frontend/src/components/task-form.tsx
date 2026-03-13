@@ -7,7 +7,10 @@ interface TaskFormProps {
 
 export function TaskForm({ action, defaultValues }: TaskFormProps) {
   return (
-    <form action={action} className="space-y-4 rounded-lg border border-border bg-white p-6">
+    <form
+      action={action}
+      className="space-y-4 rounded-lg border border-border bg-white p-6"
+    >
       <div>
         <label htmlFor="title" className="block text-sm font-medium">
           タイトル

@@ -77,7 +77,9 @@ export const taskApi = {
     }),
 };
 
-async function* streamExplain(id: number): AsyncGenerator<string, void, unknown> {
+async function* streamExplain(
+  id: number,
+): AsyncGenerator<string, void, unknown> {
   const url = `${API_BASE_URL}/tasks/${id}/explain`;
   const headers: Record<string, string> = {};
   const token = typeof window !== "undefined" ? getAccessToken() : null;

@@ -37,9 +37,17 @@ export function TaskFormClient({ task }: TaskFormClientProps) {
 
     try {
       if (task) {
-        await taskApi.update(task.id, { title, description: description || null, status });
+        await taskApi.update(task.id, {
+          title,
+          description: description || null,
+          status,
+        });
       } else {
-        await taskApi.create({ title, description: description || null, status });
+        await taskApi.create({
+          title,
+          description: description || null,
+          status,
+        });
       }
       router.push("/tasks");
       router.refresh();
