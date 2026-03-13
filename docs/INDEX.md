@@ -38,6 +38,7 @@ tags: [索引, ドキュメント]
 | `docs/decisions/2026-03-12-openai-test-mock.md` | OpenAI連携テスト・モック化方針 | ADR, pytest, OpenAI, モック, テスト, CI |
 | `docs/decisions/2026-03-12-explain-ui.md` | タスク解説UI実装（SSEストリーミング表示） | ADR, Next.js, SSE, ストリーミング, OpenAI, UI |
 | `docs/decisions/2026-03-12-auth-strategy.md` | 認証機能設計方針（JWT認証） | ADR, 認証, JWT, bcrypt, セキュリティ, FastAPI, Next.js |
+| `docs/decisions/2026-03-13-infra-deploy-verification.md` | インフラ環境構築検証レポート | ADR, Terraform, AWS, 検証, IAM, Secrets Manager |
 
 ## guidelines/
 
