@@ -13,6 +13,31 @@
 - コミットメッセージは Conventional Commits（`feat:`, `fix:`, `chore:`, `docs:` 等）を使用する
 - 自動コミット禁止（明示的に指示された場合のみ実行）
 
+## コミット前チェック（必須）
+
+コミット前に以下のコマンドを実行し、全てパスすることを確認する。
+
+**バックエンド（Python）:**
+```bash
+docker compose exec app ruff check .
+docker compose exec app ruff format --check .
+docker compose exec app mypy app/ --ignore-missing-imports
+docker compose exec app pytest --tb=short -q
+```
+
+**フロントエンド（Next.js）:**
+```bash
+docker compose exec frontend npm run lint
+docker compose exec frontend npm run format:check
+```
+
+エラーがある場合は修正してからコミットすること。自動修正コマンド:
+```bash
+docker compose exec app ruff check --fix .
+docker compose exec app ruff format .
+docker compose exec frontend npx prettier --write .
+```
+
 ## 技術スタック
 
 - フロントエンド: Next.js 15 (App Router), TypeScript
