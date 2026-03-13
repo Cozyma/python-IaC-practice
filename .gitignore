@@ -218,3 +218,6 @@ terraform.rc
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Skills (installed from skills-lock.json)
+.agents/

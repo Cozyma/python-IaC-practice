@@ -1,0 +1,100 @@
+{
+  "version": 3,
+  "skills": {
+    "ai-ml-integration": {
+      "source": "miles990/claude-software-skills",
+      "sourceType": "github",
+      "computedHash": "fbff3c0c28a07b6da22274a5f45df7ecfd40c60c4cdb3bc3ab244f679bb0a639"
+    },
+    "api-security-best-practices": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "computedHash": "ce16d10df486a28a3ba894d646de3243fc2bf9990f563fc7a9b074fd720e24d5"
+    },
+    "betterauth-fastapi-jwt-bridge": {
+      "source": "bilalmk/todo_correct",
+      "sourceType": "github",
+      "computedHash": "00313f49fc21a2d295e2ae2ac0c04234f2189f79ca272cd7b309eb223350b748"
+    },
+    "eslint-prettier-config": {
+      "source": "patricio0312rev/skills",
+      "sourceType": "github",
+      "computedHash": "dd1365afc6c06f6c8555d0624669e70c6873057da70a92b045e948329dc1b906"
+    },
+    "fastapi": {
+      "source": "fastapi/fastapi",
+      "sourceType": "github",
+      "computedHash": "ee23d5285caf055cf164ff45dd34888d381143564666baacab8aa786f22e413a"
+    },
+    "fastapi-async-patterns": {
+      "source": "thebushidocollective/han",
+      "sourceType": "github",
+      "computedHash": "cd39488c82cb6f9db2a91489a57eb1f99f8333072fb4db5386a45d343fd07908"
+    },
+    "fastapi-python": {
+      "source": "mindrally/skills",
+      "sourceType": "github",
+      "computedHash": "1d7346210a6690d2faeb089f074c0dc20a7056c2c83ac1062a11c1b73158be72"
+    },
+    "github-actions-cicd": {
+      "source": "hack23/homepage",
+      "sourceType": "github",
+      "computedHash": "57690e4c5908304d1f38039c861acb018cd386cca6b2740f729fc998c86f57ea"
+    },
+    "llm-integration": {
+      "source": "yonatangross/orchestkit",
+      "sourceType": "github",
+      "computedHash": "2a02688c7b74ae241bee76ce6cf935f11717c0361784df5141c02f5262ed3934"
+    },
+    "multi-stage-dockerfile": {
+      "source": "github/awesome-copilot",
+      "sourceType": "github",
+      "computedHash": "698bf93a84dae18fd7bd0b1d35c21427307fde78fbdf4624be9726f5f98189ca"
+    },
+    "nextjs-app-router-fundamentals": {
+      "source": "wsimmonds/claude-nextjs-skills",
+      "sourceType": "github",
+      "computedHash": "2d73efbbc227187a78d547d80e7e778d179048d592530dc9f69c8307eee6ae76"
+    },
+    "nextjs-app-router-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "computedHash": "d2f0a7065f7418fdb3ae88559f1f1426f40c26f2b5aebcd394797418d4bb3b04"
+    },
+    "pytest": {
+      "source": "bobmatnyc/claude-mpm-skills",
+      "sourceType": "github",
+      "computedHash": "91ee61c66315a02b9fd3165488604f20d84a1f55cfbeedbbb35c6d0b6fc5e1e3"
+    },
+    "python-best-practices": {
+      "source": "0xbigboss/claude-code",
+      "sourceType": "github",
+      "computedHash": "908129d87bc8e2e32492154ef38c319a846d8e6ad12e1ed2476d25a67b74677b"
+    },
+    "python-testing": {
+      "source": "affaan-m/everything-claude-code",
+      "sourceType": "github",
+      "computedHash": "c3b4ee30765eae26190412c1d0c81e078680511094eabf42c043e4e5a1c12d9c"
+    },
+    "secrets-management": {
+      "source": "sickn33/antigravity-awesome-skills",
+      "sourceType": "github",
+      "computedHash": "41eb47d6c19826e418331c2fed8d4502cec29707151fe5d23e70331dd453ffa3"
+    },
+    "sse-streaming": {
+      "source": "dadbodgeoff/drift",
+      "sourceType": "github",
+      "computedHash": "650e918fb35b48c5133aeb93746fe2602af0c8c304650a1b2b2388deb576caab"
+    },
+    "tailwind-css-patterns": {
+      "source": "giuseppe-trisciuoglio/developer-kit",
+      "sourceType": "github",
+      "computedHash": "a9d14dbb31901e53f37a33cf4d7495da95c66781dc67fe62b3e70a944bd050e0"
+    },
+    "terraform-infrastructure-as-code": {
+      "source": "manutej/luxor-claude-marketplace",
+      "sourceType": "github",
+      "computedHash": "da5238b05c01ffa3b25fe403e36e45e1615b11e7d6b061d5014609bf0bd567de"
+    }
+  }
+}
