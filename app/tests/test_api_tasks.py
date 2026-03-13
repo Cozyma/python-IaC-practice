@@ -15,7 +15,7 @@ def _make_mock_task(
     status: str = "todo",
     user_id: int | None = 1,
 ) -> AsyncMock:
-    from datetime import datetime, timezone
+    from datetime import UTC, datetime
 
     mock = AsyncMock()
     mock.id = task_id
@@ -23,8 +23,8 @@ def _make_mock_task(
     mock.description = description
     mock.status = status
     mock.user_id = user_id
-    mock.created_at = datetime(2026, 1, 1, tzinfo=timezone.utc)
-    mock.updated_at = datetime(2026, 1, 1, tzinfo=timezone.utc)
+    mock.created_at = datetime(2026, 1, 1, tzinfo=UTC)
+    mock.updated_at = datetime(2026, 1, 1, tzinfo=UTC)
     return mock
 
 
@@ -80,7 +80,10 @@ class TestCreateTask:
 
 class TestGetTasks:
     async def test_タスク一覧を取得できる(self) -> None:
-        mock_tasks = [_make_mock_task(task_id=1), _make_mock_task(task_id=2, title="タスク2")]
+        mock_tasks = [
+            _make_mock_task(task_id=1),
+            _make_mock_task(task_id=2, title="タスク2"),
+        ]
 
         with patch("app.api.tasks.get_tasks", return_value=mock_tasks):
             async with AsyncClient(

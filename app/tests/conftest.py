@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from unittest.mock import AsyncMock
 
 
@@ -13,6 +13,6 @@ def make_mock_user(
     mock.username = username
     mock.hashed_password = "hashed"
     mock.is_active = True
-    mock.created_at = datetime(2026, 1, 1, tzinfo=timezone.utc)
-    mock.updated_at = datetime(2026, 1, 1, tzinfo=timezone.utc)
+    mock.created_at = datetime(2026, 1, 1, tzinfo=UTC)
+    mock.updated_at = datetime(2026, 1, 1, tzinfo=UTC)
     return mock

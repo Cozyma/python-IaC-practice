@@ -25,12 +25,12 @@ async def get_current_user(
                 detail="無効なトークンタイプです",
             )
         user_id = int(str(payload.get("sub", "")))
-    except (JWTError, ValueError):
+    except (JWTError, ValueError) as err:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="認証が必要です",
             headers={"WWW-Authenticate": "Bearer"},
-        )
+        ) from err
     user = await get_user_by_id(db, user_id)
     if not user:
         raise HTTPException(

@@ -13,7 +13,7 @@ def _make_mock_user(
     password: str = "password123",
     is_active: bool = True,
 ) -> AsyncMock:
-    from datetime import datetime, timezone
+    from datetime import UTC, datetime
 
     mock = AsyncMock()
     mock.id = user_id
@@ -21,8 +21,8 @@ def _make_mock_user(
     mock.username = username
     mock.hashed_password = hash_password(password)
     mock.is_active = is_active
-    mock.created_at = datetime(2026, 1, 1, tzinfo=timezone.utc)
-    mock.updated_at = datetime(2026, 1, 1, tzinfo=timezone.utc)
+    mock.created_at = datetime(2026, 1, 1, tzinfo=UTC)
+    mock.updated_at = datetime(2026, 1, 1, tzinfo=UTC)
     return mock
 
 

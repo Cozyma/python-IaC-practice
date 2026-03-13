@@ -1,7 +1,7 @@
 from unittest.mock import AsyncMock, MagicMock
 
 from app.schemas.task import TaskResponse
-from app.services.task_explainer import explain_task_stream, _build_user_prompt
+from app.services.task_explainer import _build_user_prompt, explain_task_stream
 
 
 def _make_task_response(
@@ -32,7 +32,9 @@ def _make_chunk(content: str | None) -> MagicMock:
 
 class TestBuildUserPrompt:
     def test_プロンプトにタスク情報が含まれる(self) -> None:
-        task = _make_task_response(title="重要タスク", description="詳細な説明", status="in_progress")
+        task = _make_task_response(
+            title="重要タスク", description="詳細な説明", status="in_progress"
+        )
         prompt = _build_user_prompt(task)
         assert "重要タスク" in prompt
         assert "詳細な説明" in prompt

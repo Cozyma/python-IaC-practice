@@ -102,11 +102,11 @@ async def refresh_token(
                 detail="無効なトークンタイプです",
             )
         user_id = int(str(payload.get("sub", "")))
-    except (JWTError, ValueError):
+    except (JWTError, ValueError) as err:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="無効なリフレッシュトークンです",
-        )
+        ) from err
     user = await get_user_by_id(db, user_id)
     if not user or not user.is_active:
         raise HTTPException(
